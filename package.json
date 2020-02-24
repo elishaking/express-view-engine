@@ -1,0 +1,12 @@
+{
+  "name": "express-view-engine",
+  "version": "1.0.0",
+  "description": "Basic Express View Engine",
+  "main": "server.js",
+  "repository": "https://github.com/elishaking/express-view-engine.git",
+  "author": "King Elisha <ek.chibueze@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
