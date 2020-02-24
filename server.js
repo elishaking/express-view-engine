@@ -18,3 +18,9 @@ server.engine("simple", (path, options, callback) => {
 
 server.set("views", "views");
 server.set("view engine", "simple");
+
+server.get("/", (req, res) => {
+  res.render("index", { name: "king", email: "mail@mail.com" });
+});
+
+server.listen(8000, () => console.log("Server running..."));
