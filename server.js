@@ -7,15 +7,25 @@ const server = express();
 const readFile = promisify(fs.readFile);
 
 server.engine("eng.html", (path, options, callback) => {
-  return callback(null, "Hello");
-  //   readFile(path)
-  //     .then(buffer => {
-  //       let renderedStr = buffer.toString();
-  //       const variables = /{{.*}}/.exec(renderedStr);
-  //       console.log(variables);
-  //       return callback(null, renderedStr);
-  //     })
-  //     .catch(err => callback(err, null));
+  //   return callback(null, "Hello");
+  readFile(path)
+    .then(buffer => {
+      let renderedStr = buffer.toString();
+      //   const variables = /\{\{.+\}\}/.exec(renderedStr);
+      const variables = Object.keys(options);
+      variables.splice(variables.indexOf("settings"), 1);
+      variables.splice(variables.indexOf("_locals"), 1);
+      variables.splice(variables.indexOf("cache"), 1);
+
+      variables.forEach(variable => {
+        renderedStr = renderedStr.replace(
+          new RegExp(`{{${variable}}}`, "g"),
+          options[variable]
+        );
+      });
+      return callback(null, renderedStr);
+    })
+    .catch(err => callback(err, null));
 });
 
 server.set("views", path.join(__dirname, "views"));
