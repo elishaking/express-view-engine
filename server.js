@@ -7,11 +7,9 @@ const server = express();
 const readFile = promisify(fs.readFile);
 
 server.engine("eng.html", (path, options, callback) => {
-  //   return callback(null, "Hello");
   readFile(path)
     .then(buffer => {
       let renderedStr = buffer.toString();
-      //   const variables = /\{\{.+\}\}/.exec(renderedStr);
       const variables = Object.keys(options);
       variables.splice(variables.indexOf("settings"), 1);
       variables.splice(variables.indexOf("_locals"), 1);
