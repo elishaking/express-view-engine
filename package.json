@@ -6,6 +6,9 @@
   "repository": "https://github.com/elishaking/express-view-engine.git",
   "author": "King Elisha <ek.chibueze@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
   "dependencies": {
     "express": "^4.17.1"
   }
