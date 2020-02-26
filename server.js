@@ -16,11 +16,13 @@ server.engine("eng.html", (path, options, callback) => {
       variables.splice(variables.indexOf("cache"), 1);
 
       variables.forEach(variable => {
-        renderedStr = renderedStr.replace(
-          new RegExp(`{{${variable}}}`, "g"),
-          options[variable]
-        );
+        if (typeof variable !== "object" && typeof variable !== "function")
+          renderedStr = renderedStr.replace(
+            new RegExp(`{{${variable}}}`, "g"),
+            options[variable]
+          );
       });
+
       return callback(null, renderedStr);
     })
     .catch(err => callback(err, null));
