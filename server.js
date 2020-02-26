@@ -29,6 +29,8 @@ server.engine("eng.html", (path, options, callback) => {
 server.set("views", path.join(__dirname, "views"));
 server.set("view engine", "eng.html");
 
+server.use(express.static(path.join(__dirname, "static")));
+
 server.get("/", (req, res) => {
   return res.render("index", { name: "king", email: "mail@mail.com" });
 });
